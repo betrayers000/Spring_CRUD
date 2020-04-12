@@ -1,0 +1,48 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sampleDB?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: root
+
+  # JPA 설정
+  # database-platform : JPA 데이터베이스 플랫폼을 지정한다.
+  # open-in-view : OSIV는 웹 요청이 완료될 때까지 동일한 EntityManager를 갖도록 해준다.
+  # OSIV가 기본값이 true지만, 성능과 확장성 면에서 안좋아서 false
+  # show-sql : 실행 쿼리 출력 여부
+  # format_sql : 콘솔에 출력되는 jpa실행 쿼리를 가독성있게 표현
+  # ddl_auto : 데이터베이스 초기화 전략을 설정
+  #   none : 아무것도 실행안함
+  #   create : SessionFactory가 시작될때 기존테이블을 삭제 후 다시 생성
+  #   create-drop : create와 동일하나 SessionFactory가 종료될 때 drop을 실행
+  #   update : 변경된 스키마만 반영
+  #   validate : 엔티티와 테이블이 정상적으로 매핑되었는지만 확인
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: create
+  # devtools settings
+  devtools:
+    livereload:
+      enabled: true
+    freemarker:
+      cache : false
+# hidden method를 사용하기 위한 설정
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+# SQL에서 물음표로 표기된 부분(bind parameter)을 로그로 출력해서 확인할 수 있습니다.
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
